@@ -14,6 +14,9 @@ resource "null_resource" "test" {
   }
   provisioner "remote-exec" {
     inline = [
+        "sudo apt-get update -y",
+        "sleep 10",
+        "sudo apt-get update -y",
       "sudo yum install nginx -y",
       "sudo service nginx start"
     ]
