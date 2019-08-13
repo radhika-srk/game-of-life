@@ -24,8 +24,11 @@ pipeline {
                 INFRA_ACTION = "${params.action}"
             }
             steps {
+               script {
+                    
                 if (params.env == 'DEV')
                 sh "make $INFRA_ACTION"
+               }
             }
         }
     }
