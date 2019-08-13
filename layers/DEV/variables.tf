@@ -2,6 +2,12 @@
 variable "region" {
   description = "Region"
 }
+variable "aws_accesskey" {
+  type = "string"
+}
+variable "aws_secretkey" {
+  type = "string"
+}
 variable "availability_zones" {
   description = "availabilityzones that are going to be used for the subnets"
 } 
