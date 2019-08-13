@@ -9,11 +9,21 @@ pipeline {
     }
     stages {
         stage('git') {
+            when {
+                expression {
+                    params.action == 'apply'
+                }
+            }
             steps {
                 git 'https://github.com/veerendradevops/game-of-life.git'
             }
         }
         stage('build') {
+            when {
+                expression {
+                    params.action == 'apply'
+                }
+            }
             steps {
                 sh '/opt/maven/bin/mvn clean package'
             }
