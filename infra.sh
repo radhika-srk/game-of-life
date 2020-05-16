@@ -5,8 +5,6 @@ export AWS_SESSION_TOKEN=`cat assume-role-output.txt | jq -c '.Credentials.Sessi
 rm -f assume-role-output.txt
 
 export TF_VAR_account_id=$AWS_ACCOUNT_ID
-
-
 set +x
 echo "=== Terraform $INFRA_ACTION for $LAYER ==="
 make $INFRA_ACTION
