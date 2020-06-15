@@ -1,9 +1,16 @@
+#Note: you need to install docker pipeline, docker plugins to work with below script ###
+### add global credentials for dockerhub credentials(username, password) ###
+
+
 pipeline {
     environment {
     registry = "veerendradevops/gameoflife"
     registryCredential = 'dockerhub-cred'
     dockerImage = ''
   }
+  parameters {
+        choice(name: 'kubernetes', choices: 'deployment\nrollout\ndelete', description: 'Select kubernetes action')
+    }
     agent any 
     stages {
         stage('git') {
@@ -33,8 +40,34 @@ pipeline {
             }
         }
         stage('k8s-deployment') {
+            when {
+                expression {
+                    params.kubernetes == 'deployment'
+                }
+            }
             steps {
                 sh 'kubectl apply -f kubernetes/deployment.yml'
+            }
+        }
+        stage('k8s-rollout') {
+            when {
+                expression {
+                    params.kubernetes == 'rollout'
+                }
+            }
+            steps {
+                sh 'kubectl rollout undo deployment/gameoflife-deploy'
+            }
+        }
+        stage('k8s-delete') {
+            when {
+                expression {
+                    params.kubernetes == 'delete'
+                }
+            }
+            steps {
+                sh 'kubectl delete deployment gameoflife-deploy'
+                sh 'kubectl delete svc gameoflife'
             }
         }
     }
