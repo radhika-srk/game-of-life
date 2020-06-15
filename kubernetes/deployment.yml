@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gameoflife-deploy
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: gol
+  minReadySeconds: 30
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
+  template:
+    metadata:
+      labels:
+        app: gol
+    spec:
+      containers:
+      - name: gameoflife
+        image: veerendradevops/gameoflife
+        ports:
+        - containerPort: 8080

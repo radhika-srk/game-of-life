@@ -1,0 +1,13 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name:  gameoflife
+spec:
+  selector:
+    app:  gol
+  type:  NodePort
+  ports:
+  - name:  http
+    port:  8080
+    nodePort: 30001
+    protocol: TCP
