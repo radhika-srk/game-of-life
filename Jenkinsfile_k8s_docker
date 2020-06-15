@@ -14,11 +14,21 @@ pipeline {
     agent any 
     stages {
         stage('git') {
+             when {
+                expression {
+                    params.kubernetes == 'deployment'
+                }
+            }
             steps {
                 git 'https://github.com/veerendradevops/game-of-life.git'
             }
         }
         stage('build') {
+             when {
+                expression {
+                    params.kubernetes == 'deployment'
+                }
+            }
             steps {
                 sh '/opt/maven/apache-maven-3.6.3/bin/mvn clean package'
             }
