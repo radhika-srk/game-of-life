@@ -1,16 +1,29 @@
-apiVersion: v1
-kind: Pod
+apiVersion: apps/v1
+kind: Deployment
 metadata:
-  name: gameoflife
-  labels:
-    env: dev
-    app: gol
+  name: gameoflife-deploy
 spec:
-  containers:
-  - name: gol
-    image: veerendradevops/gol_tomcat
-    ports:
-    - containerPort: 8080
+  replicas: 3
+  selector:
+    matchLabels:
+      app: gol
+  minReadySeconds: 30
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
+  template:
+    metadata:
+      labels:
+        app: gol
+    spec:
+      containers:
+      - name: gameoflife
+        image: veerendradevops/gameoflife
+        ports:
+        - containerPort: 8080
+
 ---
 
 kind: Service
