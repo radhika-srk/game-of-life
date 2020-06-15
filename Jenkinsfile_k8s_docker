@@ -1,5 +1,5 @@
-#Note: you need to install docker pipeline, docker plugins to work with below script ###
-### add global credentials for dockerhub credentials(username, password) ###
+/* Note: you need to install docker pipeline, docker plugins to work with below script ###
+### add global credentials for dockerhub credentials(username, password) */
 
 
 pipeline {
