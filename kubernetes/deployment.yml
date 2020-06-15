@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
       - name: gameoflife
-        image: veerendradevops/gameoflife
+        image: veerendradevops/gameoflife:${BUILD_NUMBER}
         ports:
         - containerPort: 8080
 
