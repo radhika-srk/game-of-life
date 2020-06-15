@@ -34,6 +34,11 @@ pipeline {
             }
         }
         stage('Building image') {
+             when {
+                expression {
+                    params.kubernetes == 'deployment'
+                }
+            }
       steps{
         script {
           dockerImage = docker.build registry + ":$BUILD_NUMBER"
@@ -41,6 +46,11 @@ pipeline {
       }
     }
         stage('pushingdockerimages') {
+             when {
+                expression {
+                    params.kubernetes == 'deployment'
+                }
+            }
             steps {
                script {
                 docker.withRegistry( '', registryCredential ) {
