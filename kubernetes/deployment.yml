@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
       - name: gameoflife
-        image: veerendradevops/openmrs:2.1.2
+        image: veerendradevops/gameoflife
         ports:
         - containerPort: 8080
 
